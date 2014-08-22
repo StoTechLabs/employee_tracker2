@@ -76,7 +76,7 @@ def projects_menu
       new_project = Project.create({:name => project_name})
     when 'l'
       Project.all.each { |i| puts i.name}
-      puts "\nPress 'a' to add an employee to the project, press 'l' to list the employee on the project."
+      puts "\nPress 'a' to add an employee to the project, press 'l' to list the employee on a project."
       user_input = gets.chomp
       if user_input == 'a'
         puts "Type the name of the project"
@@ -88,8 +88,9 @@ def projects_menu
       else user_input == 'l'
         puts "Type the name of the project"
         project_choice = gets.chomp
-        Project.list_employee_by_project(project_choice)
-      end    when 'r'
+        puts Project.list_employee_by_project(project_choice)
+      end
+    when 'r'
       main_menu
     when 'e'
       puts "Bye"
@@ -126,7 +127,7 @@ def divisions_menu
       else user_input == 'l'
         puts "Type the name of the division"
         division_choice = gets.chomp
-        Employee.list_employee_by_division(division_choice)
+        puts Employee.list_employee_by_division(division_choice)
       end
     when 'r'
       main_menu

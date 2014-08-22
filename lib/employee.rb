@@ -2,7 +2,7 @@ require 'pry'
 
 class Employee < ActiveRecord::Base
   belongs_to(:division)
-  has_many(:projects)
+  has_and_belongs_to_many(:projects)
 
   def self.add_division_id_to_employee(division_name, employee_name)
       division = Division.find_by(name: division_name)
