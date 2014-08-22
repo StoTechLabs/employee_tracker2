@@ -8,6 +8,8 @@ ActiveRecord::Base.establish_connection(YAML::load(File.open('./db/config.yml'))
 
 RSpec.configure do |config|
   config.after(:each) do
-    Task.all.each { |task| task.destroy }
+    Employee.all.each { |employee| employee.destroy }
+    Division.all.each { |div| div.destroy }
+    Project.all.each { |pro| pro.destroy }
   end
 end

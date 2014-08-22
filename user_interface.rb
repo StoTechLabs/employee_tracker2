@@ -46,7 +46,7 @@ def employee_menu
     choice = gets.chomp
     case choice
     when 'a'
-      puts "Enter in full name of employee"
+      puts "Enter the full name of the employee"
       employee_name = gets.chomp
       new_emp = Employee.create({:name => employee_name})
     when 'l'
@@ -71,12 +71,25 @@ def projects_menu
     choice = gets.chomp
     case choice
     when 'a'
-      puts "Enter in the name of a Project that you would like to add"
+      puts "Enter the name of a Project that you would like to add"
       project_name = gets.chomp
       new_project = Project.create({:name => project_name})
     when 'l'
       Project.all.each { |i| puts i.name}
-    when 'r'
+      puts "\nPress 'a' to add an employee to the project, press 'l' to list the employee on the project."
+      user_input = gets.chomp
+      if user_input == 'a'
+        puts "Type the name of the project"
+        project_choice = gets.chomp
+        Employee.all.each { |i| puts i.name}
+        puts "Enter the name of the employee"
+        employee_choice = gets.chomp
+        Project.add_employee_id_to_project(project_choice, employee_choice)
+      else user_input == 'l'
+        puts "Type the name of the project"
+        project_choice = gets.chomp
+        Employee.list_employee_by_project(project_choice)
+      end    when 'r'
       main_menu
     when 'e'
       puts "Bye"
@@ -101,14 +114,19 @@ def divisions_menu
       new_division = Division.create({:name => division_name})
     when 'l'
       Division.all.each { |i| puts i.name}
-      puts "\nPress 'y' to add an employee to a division or anything else to continue"
+      puts "\nPress 'a' to add an employee, press 'l' to list the employees in a division."
       user_input = gets.chomp
-      if user_input = "y" || "Y"
+      if user_input == 'a'
         puts "Type the name of the division"
         division_choice = gets.chomp
+        Employee.all.each { |i| puts i.name}
         puts "Enter the name of the employee"
         employee_choice = gets.chomp
         Employee.add_division_id_to_employee(division_choice, employee_choice)
+      else user_input == 'l'
+        puts "Type the name of the division"
+        division_choice = gets.chomp
+        Employee.list_employee_by_division(division_choice)
       end
     when 'r'
       main_menu
