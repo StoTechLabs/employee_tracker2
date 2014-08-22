@@ -6,8 +6,18 @@ describe Project do
     new_project = Project.create({:name => "Project ABC"})
     new_employee = Employee.create({:name => "Bob"})
     Project.add_employee_id_to_project(new_project.name, new_employee.name)
-    p Project.find_by(name: "Project ABC")
+    Project.find_by(name: "Project ABC")
     expect(Project.find_by(name: "Project ABC").employee_id).to be_an_instance_of Fixnum
    end
+
+   it "lists the employees of one division" do
+    new_project = Project.create({:name => "Project ABC"})
+    new_employee = Employee.create({:name => "Bob"})
+    new_employee2 = Employee.create({:name => "Ben"})
+    Project.add_employee_id_to_project(new_project.name, new_employee.name )
+    Project.add_employee_id_to_project(new_project.name, new_employee2.name )
+    employees = Project.list_employee_by_project(new_project.name)
+    expect(employees).to eq 'Ben'
+  end
 
 end

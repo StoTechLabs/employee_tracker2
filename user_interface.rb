@@ -88,7 +88,7 @@ def projects_menu
       else user_input == 'l'
         puts "Type the name of the project"
         project_choice = gets.chomp
-        Employee.list_employee_by_project(project_choice)
+        Project.list_employee_by_project(project_choice)
       end    when 'r'
       main_menu
     when 'e'
