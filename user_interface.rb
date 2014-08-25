@@ -121,7 +121,7 @@ def divisions_menu
       new_division = Division.create({:name => division_name})
     when 'l'
       Division.all.each { |i| puts i.name}
-      puts "\nPress 'a' to add an employee, press 'l' to list the employees in a division."
+      puts "\nPress 'a' to add an employee, press 'l' to list the employees in a division, press 'p' to see the projects for this division"
       user_input = gets.chomp
       if user_input == 'a'
         puts "Type the name of the division"
@@ -130,11 +130,24 @@ def divisions_menu
         puts "Enter the name of the employee"
         employee_choice = gets.chomp
         Employee.add_division_id_to_employee(division_choice, employee_choice)
-      else user_input == 'l'
+      elsif user_input == 'l'
         puts "Type the name of the division"
         division_choice = gets.chomp
         puts Employee.list_employee_by_division(division_choice)
-      end
+      elsif user_input = 'p'
+        puts "Here are the list of divisions"
+        sleep(1.0)
+        Division.all.each { |i| puts i.name}
+        sleep(1.0)
+        puts "Type the name of the division to see the projects that it's employees are working on"
+        division_choice = gets.chomp
+        division = Division.find_by(name: division_choice)
+        Employee.all.each do |emp|
+            if emp.division_id == division.id
+              emp.projects.each {|pro| puts pro.name}
+            end
+          end
+        end
     when 'r'
       main_menu
     when 'e'
@@ -159,7 +172,6 @@ def add_contribution
       c.save
     end
   end
-  binding.pry
 end
 
 welcome

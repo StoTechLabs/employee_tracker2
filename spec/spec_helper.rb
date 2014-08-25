@@ -12,5 +12,6 @@ RSpec.configure do |config|
     Employee.all.each { |employee| employee.destroy }
     Division.all.each { |div| div.destroy }
     Project.all.each { |pro| pro.destroy }
+    Contribution.all.each { |cont| cont.destroy }
   end
 end
